@@ -25,3 +25,7 @@ async function getWorks() {
 getWorks();
 
 // Partie 2 : Gestion de l'affichage des catégories et filtrage des travaux
+
+const filters = document.querySelector(".filters");
+
+async function getFilters() {
