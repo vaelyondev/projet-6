@@ -1,3 +1,5 @@
+// Partie 1 : Récupération des travaux depuis l'API et affichage dans la galerie
+
 const gallery = document.querySelector(".gallery");
 console.log(gallery);
 
@@ -21,3 +23,5 @@ async function getWorks() {
     });
 }
 getWorks();
+
+// Partie 2 : Gestion de l'affichage des catégories et filtrage des travaux
