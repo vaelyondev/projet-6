@@ -29,3 +29,19 @@ getWorks();
 const filters = document.querySelector(".filters");
 
 async function getFilters() {
+    const response = await fetch("http://localhost:5678/api/categories");
+    const categories = await response.json();
+
+    console.log(categories);
+
+    const button = document.createElement("button");
+    button.textContent = "Tous";
+    filters.appendChild(button);
+
+    categories.forEach((category) => {
+        const button = document.createElement("button");
+        button.textContent = category.name;
+        filters.appendChild(button);
+    });
+}
+getFilters()

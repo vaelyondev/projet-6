@@ -3,6 +3,35 @@
    License: none (public domain)
 */
 
+/* Mes ajouts */
+
+/* Button */
+
+.filters {
+	display: flex;
+	justify-content: center;
+	gap: 10px;
+	margin-bottom: 50px;
+}
+
+.filters button {
+	font-family: "Syne";
+	font-weight: 700;
+	color: #1d6154;
+	background-color: white;
+	border: 1px solid #1d6154;
+	border-radius: 60px;
+	padding: 10px 20px;
+	cursor: pointer;
+}
+
+.filters button:hover {
+	color: white;
+	background-color: #1d6154;
+}
+
+/* Base */
+
 html,
 body,
 div,
