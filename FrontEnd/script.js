@@ -1,13 +1,15 @@
-// Partie 1 : Récupération des travaux depuis l'API et affichage dans la galerie
+// Éléments et données utilisés dans plusieurs fonctions
 
 const gallery = document.querySelector(".gallery");
-console.log(gallery);
+const filters = document.querySelector(".filters");
 
-async function getWorks() {
-    const response = await fetch("http://localhost:5678/api/works");
-    const works = await response.json();
+// Contient tous les projets récupérés depuis l'API.
+let allWorks = [];
 
-    works.forEach((work) => {
+function displayWorks(worksToDisplay) {
+    // Évite d'ajouter une nouvelle liste sous celle déjà affichée.
+    gallery.innerHTML = "";
+    worksToDisplay.forEach((work) => {
         const figure = document.createElement("figure");
 
         const image = document.createElement("img");
@@ -22,26 +24,41 @@ async function getWorks() {
         gallery.appendChild(figure);
     });
 }
+
+async function getWorks() {
+    // Récupère les projets, les mémorise, puis les affiche tous.
+    const response = await fetch("http://localhost:5678/api/works");
+    allWorks = await response.json();
+    displayWorks(allWorks);
+}
 getWorks();
 
-// Partie 2 : Gestion de l'affichage des catégories et filtrage des travaux
-
-const filters = document.querySelector(".filters");
+// Création dynamique des boutons de filtre
 
 async function getFilters() {
     const response = await fetch("http://localhost:5678/api/categories");
     const categories = await response.json();
 
-    console.log(categories);
-
     const button = document.createElement("button");
     button.textContent = "Tous";
     filters.appendChild(button);
+    button.addEventListener("click", () => {
+        // Réaffiche la liste complète.
+        displayWorks(allWorks);
+    });
 
     categories.forEach((category) => {
         const button = document.createElement("button");
         button.textContent = category.name;
+        // Associe au bouton l'id de la catégorie qu'il représente.
+        button.dataset.categoryId = category.id;
         filters.appendChild(button);
+        button.addEventListener("click", () => {
+            // Garde uniquement les projets de la catégorie cliquée.
+            const filteredWorks = allWorks.filter((work) => work.category.id === category.id);
+            displayWorks(filteredWorks);
+        });
     });
 }
 getFilters()
+
