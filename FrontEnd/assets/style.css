@@ -28,7 +28,6 @@ h1 a {
 	font-weight: inherit;
 }
 
-/* Le span est maintenant dans le lien du logo. */
 h1 a span {
 	font-family: 'Work Sans';
 	font-size: 10px;
@@ -61,6 +60,7 @@ h1 a span {
 }
 
 /* Page de connexion */
+
 #login {
 	width: 50%;
 	margin: 50px auto;
@@ -97,6 +97,13 @@ h1 a span {
 	text-align: center;
 	text-decoration: underline;
 }
+
+#login-error {
+	margin-top: 1em;
+	color: #D65353;
+}
+
+/* Fin de Mes ajouts */
 
 /* Base */
 
