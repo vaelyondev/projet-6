@@ -99,8 +99,13 @@ h1 a span {
 }
 
 #login-error {
-	margin-top: 1em;
+	margin: -1.5em 0 2em;
 	color: #D65353;
+	text-align: center;
+}
+
+#login-error:empty {
+	display: none;
 }
 
 /* Fin de Mes ajouts */
