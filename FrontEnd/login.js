@@ -1,3 +1,4 @@
+// Etape 5.2
 // Le formulaire et l'emplacement où afficher une erreur.
 const loginForm = document.querySelector("#login form");
 const loginError = document.querySelector("#login-error");

@@ -1,3 +1,15 @@
+// Etape 5.3
+
+const token = localStorage.getItem("token")
+if (token) {
+    console.log("User connecté")
+}
+else {
+    console.log("User non connecté")
+}
+console.log(token)
+
+// Etape 3
 // Éléments et données utilisés dans plusieurs fonctions
 
 const gallery = document.querySelector(".gallery");
