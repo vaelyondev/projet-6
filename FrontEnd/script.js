@@ -1,8 +1,22 @@
+const gallery = document.querySelector(".gallery");
+const filters = document.querySelector(".filters");
+
 // Etape 5.3
 
 const token = localStorage.getItem("token")
+const loginLink = document.querySelector("#login-link")
+const editMode = document.querySelector("#edit-mode")
+const editProjects = document.querySelector("#edit-projects")
+
 if (token) {
     console.log("User connecté")
+    loginLink.textContent = "logout"
+    filters.style.display = "none"
+    editMode.style.display = "flex"
+    editProjects.style.display = "flex"
+    loginLink.addEventListener("click", function () {
+        localStorage.removeItem("token")
+    })
 }
 else {
     console.log("User non connecté")
@@ -10,10 +24,6 @@ else {
 console.log(token)
 
 // Etape 3
-// Éléments et données utilisés dans plusieurs fonctions
-
-const gallery = document.querySelector(".gallery");
-const filters = document.querySelector(".filters");
 
 // Contient tous les projets récupérés depuis l'API.
 let allWorks = [];
