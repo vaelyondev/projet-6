@@ -7,6 +7,7 @@ const editProjects = document.querySelector("#edit-projects")
 
 const modal = document.querySelector("#modal")
 const modalClose = document.querySelector(".modal-close")
+const modalGallery = document.querySelector(".modal-gallery")
 
 // Etape 5.3
 
@@ -29,7 +30,30 @@ console.log(token)
 
 // Etape 6 - Modal
 
+function displayModalWorks(worksToDisplay) {
+    modalGallery.innerHTML = ""
+
+    worksToDisplay.forEach((work) => {
+        const project = document.createElement("div")
+        project.classList.add("modal-project")
+
+        const image = document.createElement("img")
+        image.src = work.imageUrl
+        image.alt = work.title
+
+        const deleteButton = document.createElement("button")
+        deleteButton.classList.add("delete-project")
+        deleteButton.innerHTML = '<i class="fa-solid fa-trash-can"></i>'
+
+        project.appendChild(image)
+        project.appendChild(deleteButton)
+
+        modalGallery.appendChild(project)
+    })
+}
+
 editProjects.addEventListener("click", function () {
+    displayModalWorks(allWorks)
     modal.style.display = "flex"
 })
 
@@ -76,7 +100,6 @@ async function getWorks() {
 getWorks();
 
 // Création dynamique des boutons de filtre
-
 async function getFilters() {
     const response = await fetch("http://localhost:5678/api/categories");
     const categories = await response.json();

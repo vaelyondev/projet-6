@@ -163,6 +163,8 @@ h1 a span {
 .modal-content {
 	width: 630px;
 	height: 688px;
+	max-width: calc(100vw - 40px);
+	max-height: calc(100vh - 80px);
 	background-color: white;
 	border-radius: 10px;
 	position: relative;
@@ -186,6 +188,46 @@ h1 a span {
 	border: none;
 	font-size: 18px;
 	cursor: pointer;
+}
+
+.modal-gallery {
+	display: grid;
+	grid-template-columns: repeat(5, 1fr);
+	gap: 10px;
+	margin-top: 40px;
+}
+
+.modal-gallery img {
+	width: 100%;
+	height: 100px;
+	object-fit: cover;
+}
+
+.modal-project {
+	position: relative;
+}
+
+.modal-project img {
+	width: 100%;
+	height: 100px;
+	object-fit: cover;
+}
+
+.delete-project {
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	width: 20px;
+	height: 20px;
+	border: none;
+	background-color: black;
+	color: white;
+	cursor: pointer;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 0;
+	font-size: 10px;
 }
 
 /* Fin de Mes ajouts */
