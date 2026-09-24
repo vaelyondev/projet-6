@@ -1,12 +1,16 @@
 const gallery = document.querySelector(".gallery");
 const filters = document.querySelector(".filters");
 
-// Etape 5.3
-
-const token = localStorage.getItem("token")
 const loginLink = document.querySelector("#login-link")
 const editMode = document.querySelector("#edit-mode")
 const editProjects = document.querySelector("#edit-projects")
+
+const modal = document.querySelector("#modal")
+const modalClose = document.querySelector(".modal-close")
+
+// Etape 5.3
+
+const token = localStorage.getItem("token")
 
 if (token) {
     console.log("User connecté")
@@ -22,6 +26,22 @@ else {
     console.log("User non connecté")
 }
 console.log(token)
+
+// Etape 6 - Modal
+
+editProjects.addEventListener("click", function () {
+    modal.style.display = "flex"
+})
+
+modalClose.addEventListener("click", function () {
+    modal.style.display = "none"
+})
+
+modal.addEventListener("click", function (event) {
+    if (event.target === modal) {
+        modal.style.display = "none"
+    }
+})
 
 // Etape 3
 
