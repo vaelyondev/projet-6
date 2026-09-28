@@ -230,6 +230,144 @@ h1 a span {
 	font-size: 10px;
 }
 
+.modal-add-view {
+    display: none;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.modal-separator {
+	border: none;
+	border-top: 1px solid #b3b3b3;
+	margin: 40px 0 25px;
+}
+
+#add-photo-button {
+	display: block;
+	margin: 0 auto;
+	padding: 10px 30px;
+	border: none;
+	border-radius: 60px;
+	background-color: #1d6154;
+	color: white;
+	font-family: "Syne";
+	font-weight: 700;
+	cursor: pointer;
+}
+
+#back-to-gallery {
+	position: absolute;
+	top: 25px;
+	left: 25px;
+	background: none;
+	border: none;
+	padding: 0;
+	font-size: 20px;
+	cursor: pointer;
+}
+
+.modal-add-view h2 {
+	text-align: center;
+	margin-top: 45px;
+	margin-bottom: 30px;
+	color: black;
+	font-family: "Work Sans";
+	font-weight: 400;
+}
+
+#add-work-form {
+    display: flex;
+    flex-direction: column;
+    height: calc(100% - 105px);
+}
+
+#add-work-form .modal-separator {
+    margin-top: auto;
+    margin-bottom: 25px;
+}
+
+#add-work-form label {
+	margin-bottom: 10px;
+}
+
+#add-work-form input[type="text"],
+#add-work-form select {
+	height: 50px;
+	margin-bottom: 25px;
+	border: none;
+	box-shadow: 0 4px 14px rgba(0, 0, 0, 0.09);
+	font-family: "Work Sans";
+	padding: 0 15px;
+	box-sizing: border-box;
+}
+
+#add-work-form input[type="file"] {
+	background-color: #e8f1f6;
+	padding: 35px 20px;
+	height: auto;
+	margin-bottom: 25px;
+	border: none;
+	box-shadow: none;
+}
+
+#add-work-form button[type="submit"] {
+    width: 180px;
+    margin: 0 auto;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 60px;
+    background-color: #a7a7a7;
+    color: white;
+    font-family: "Syne";
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.photo-upload {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	background-color: #e8f1f6;
+	height: 170px;
+	padding: 20px;
+	margin-bottom: 30px;
+	box-sizing: border-box;
+	overflow: hidden;
+}
+
+.photo-upload i {
+	font-size: 60px;
+	color: #b9c5cc;
+	margin-bottom: 10px;
+}
+
+.photo-upload-button {
+	background-color: #cbd6dc;
+	color: #306685;
+	border-radius: 50px;
+	padding: 10px 25px;
+	margin-bottom: 8px;
+	cursor: pointer;
+	font-weight: 500;
+}
+
+.photo-upload span {
+	font-size: 10px;
+	color: #444;
+}
+
+.photo-upload input[type="file"] {
+	display: none;
+}
+
+#image-preview {
+	display: none;
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+}
+
 /* Fin de Mes ajouts */
 
 /* Base */

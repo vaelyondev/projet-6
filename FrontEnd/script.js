@@ -8,8 +8,18 @@ const editProjects = document.querySelector("#edit-projects")
 const modal = document.querySelector("#modal")
 const modalClose = document.querySelector(".modal-close")
 const modalGallery = document.querySelector(".modal-gallery")
+const modalGalleryView = document.querySelector(".modal-gallery-view")
+const modalAddView = document.querySelector(".modal-add-view")
+const addPhotoButton = document.querySelector("#add-photo-button")
+const backToGallery = document.querySelector("#back-to-gallery")
+const imageInput = document.querySelector("#image")
+const imagePreview = document.querySelector("#image-preview")
+const uploadPlaceholders = document.querySelectorAll(".upload-placeholder")
+const categorySelect = document.querySelector("#category")
+const titleInput = document.querySelector("#title")
+const validateButton = document.querySelector('#add-work-form button[type="submit"]')
 
-// Etape 5.3
+// Etape 5.3 - Gestion du token
 
 const token = localStorage.getItem("token")
 
@@ -52,6 +62,26 @@ function displayModalWorks(worksToDisplay) {
     })
 }
 
+function checkForm() {
+    const imageSelected = imageInput.files.length > 0
+    const titleFilled = titleInput.value !== ""
+    const categorySelected = categorySelect.value !== ""
+
+    if (imageSelected && titleFilled && categorySelected) {
+        validateButton.style.backgroundColor = "#1d6154"
+        validateButton.disabled = false
+    } else {
+        validateButton.style.backgroundColor = "#a7a7a7"
+        validateButton.disabled = true
+    }
+}
+
+imageInput.addEventListener("change", checkForm)
+titleInput.addEventListener("input", checkForm)
+categorySelect.addEventListener("change", checkForm)
+
+checkForm()
+
 editProjects.addEventListener("click", function () {
     displayModalWorks(allWorks)
     modal.style.display = "flex"
@@ -67,10 +97,34 @@ modal.addEventListener("click", function (event) {
     }
 })
 
-// Etape 3
+addPhotoButton.addEventListener("click", function () {
+    modalGalleryView.style.display = "none"
+    modalAddView.style.display = "block"
+})
+
+backToGallery.addEventListener("click", function () {
+    modalAddView.style.display = "none"
+    modalGalleryView.style.display = "block"
+})
+
+imageInput.addEventListener("change", function () {
+    const file = imageInput.files[0]
+
+    if (file) {
+        imagePreview.src = URL.createObjectURL(file)
+        imagePreview.style.display = "block"
+
+        uploadPlaceholders.forEach(function (element) {
+            element.style.display = "none"
+        })
+    }
+})
+
+// Etape 3 - Gestion des projets
 
 // Contient tous les projets récupérés depuis l'API.
 let allWorks = [];
+let allCategories = []
 
 function displayWorks(worksToDisplay) {
     // Évite d'ajouter une nouvelle liste sous celle déjà affichée.
@@ -102,7 +156,14 @@ getWorks();
 // Création dynamique des boutons de filtre
 async function getFilters() {
     const response = await fetch("http://localhost:5678/api/categories");
-    const categories = await response.json();
+    allCategories = await response.json();
+
+    allCategories.forEach(function (category) {
+        const option = document.createElement("option")
+        option.value = category.id
+        option.textContent = category.name
+        categorySelect.appendChild(option)
+    })
 
     const button = document.createElement("button");
     button.textContent = "Tous";
@@ -112,7 +173,7 @@ async function getFilters() {
         displayWorks(allWorks);
     });
 
-    categories.forEach((category) => {
+    allCategories.forEach((category) => {
         const button = document.createElement("button");
         button.textContent = category.name;
         // Associe au bouton l'id de la catégorie qu'il représente.
