@@ -1,3 +1,5 @@
+console.log("PAGE CHARGÉE")
+
 const gallery = document.querySelector(".gallery");
 const filters = document.querySelector(".filters");
 
@@ -38,7 +40,7 @@ else {
 }
 console.log(token)
 
-// Etape 6 - Modal
+// Etape 6 - Modal / Etape 7 - Suppression de travaux
 
 function displayModalWorks(worksToDisplay) {
     modalGallery.innerHTML = ""
@@ -52,6 +54,8 @@ function displayModalWorks(worksToDisplay) {
         image.alt = work.title
 
         const deleteButton = document.createElement("button")
+        deleteButton.type = "button"
+        deleteButton.dataset.id = work.id
         deleteButton.classList.add("delete-project")
         deleteButton.innerHTML = '<i class="fa-solid fa-trash-can"></i>'
 
@@ -59,6 +63,30 @@ function displayModalWorks(worksToDisplay) {
         project.appendChild(deleteButton)
 
         modalGallery.appendChild(project)
+
+        deleteButton.addEventListener("click", async function (event) {
+            event.preventDefault()
+            const workId = deleteButton.dataset.id
+
+            const response = await fetch("http://localhost:5678/api/works/" + workId, {
+                method: "DELETE",
+                headers: {
+                    "Authorization": "Bearer " + token
+                }
+            })
+
+            if (response.ok) {
+                project.remove()
+
+                allWorks = allWorks.filter((work) => work.id != workId)
+
+                displayWorks(allWorks)
+            } else {
+                console.log("Erreur lors de la suppression")
+            }
+
+            console.log(response.status)
+        })
     })
 }
 
