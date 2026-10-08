@@ -16,9 +16,6 @@ echo Restauration de database.sqlite...
 git restore database.sqlite
 
 echo.
-echo Relancement du backend...
-
-start "Backend Projet 6" cmd /k npm start
 
 echo.
 echo Base restauree !
