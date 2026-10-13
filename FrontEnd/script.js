@@ -1,4 +1,4 @@
-console.log("PAGE CHARGÉE")
+console.log("Page chargée")
 
 const gallery = document.querySelector(".gallery");
 const filters = document.querySelector(".filters");
@@ -20,6 +20,48 @@ const uploadPlaceholders = document.querySelectorAll(".upload-placeholder")
 const categorySelect = document.querySelector("#category")
 const titleInput = document.querySelector("#title")
 const validateButton = document.querySelector('#add-work-form button[type="submit"]')
+const addWorkForm = document.querySelector("#add-work-form")
+const addWorkError = document.querySelector("#add-work-error")
+
+// Etape 8.1 - Ajouter un nouveau projet
+
+addWorkForm.addEventListener("submit", async function (event) {
+    event.preventDefault()
+    addWorkError.textContent = ""
+
+    const formData = new FormData(addWorkForm)
+
+    try {
+        const response = await fetch("http://localhost:5678/api/works", {
+            method: "POST",
+            headers: {
+                "Authorization": "Bearer " + token
+            },
+            body: formData
+        })
+
+        if (response.ok) {
+            await getWorks()
+            displayModalWorks(allWorks)
+
+            addWorkForm.reset()
+            imagePreview.style.display = "none"
+
+            uploadPlaceholders.forEach((element) => {
+                element.style.display = ""
+            })
+
+            checkForm()
+            modal.style.display = "none"
+        } else {
+            addWorkError.textContent = "Erreur lors de l'ajout du projet"
+            console.log("Erreur HTTP :", response.status)
+        }
+    } catch (error) {
+        addWorkError.textContent = "Impossible de contacter le serveur"
+        console.error("Erreur de connexion :", error)
+    }
+})
 
 // Etape 5.3 - Gestion du token
 
@@ -150,12 +192,10 @@ imageInput.addEventListener("change", function () {
 
 // Etape 3 - Gestion des projets
 
-// Contient tous les projets récupérés depuis l'API.
 let allWorks = [];
 let allCategories = []
 
 function displayWorks(worksToDisplay) {
-    // Évite d'ajouter une nouvelle liste sous celle déjà affichée.
     gallery.innerHTML = "";
     worksToDisplay.forEach((work) => {
         const figure = document.createElement("figure");
@@ -174,14 +214,12 @@ function displayWorks(worksToDisplay) {
 }
 
 async function getWorks() {
-    // Récupère les projets, les mémorise, puis les affiche tous.
     const response = await fetch("http://localhost:5678/api/works");
     allWorks = await response.json();
     displayWorks(allWorks);
 }
 getWorks();
 
-// Création dynamique des boutons de filtre
 async function getFilters() {
     const response = await fetch("http://localhost:5678/api/categories");
     allCategories = await response.json();
@@ -197,18 +235,15 @@ async function getFilters() {
     button.textContent = "Tous";
     filters.appendChild(button);
     button.addEventListener("click", () => {
-        // Réaffiche la liste complète.
         displayWorks(allWorks);
     });
 
     allCategories.forEach((category) => {
         const button = document.createElement("button");
         button.textContent = category.name;
-        // Associe au bouton l'id de la catégorie qu'il représente.
         button.dataset.categoryId = category.id;
         filters.appendChild(button);
         button.addEventListener("click", () => {
-            // Garde uniquement les projets de la catégorie cliquée.
             const filteredWorks = allWorks.filter((work) => work.category.id === category.id);
             displayWorks(filteredWorks);
         });
