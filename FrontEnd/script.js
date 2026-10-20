@@ -51,7 +51,6 @@ addWorkForm.addEventListener("submit", async function (event) {
         })
 
         if (response.ok) {
-            // La réponse contient le nouveau projet : pas besoin de recharger la page.
             const newWork = await response.json()
             allWorks.push(newWork)
             displayWorks(allWorks)
@@ -144,7 +143,6 @@ function displayModalWorks(worksToDisplay) {
     })
 }
 
-// Vérifie la taille et le format, en plus du filtre proposé par le sélecteur de fichiers.
 function getImageError() {
     const file = imageInput.files[0]
     if (!file) return ""
@@ -209,7 +207,6 @@ backToGallery.addEventListener("click", function () {
     addPhotoButton.focus()
 })
 
-// Libère l'ancienne image et restaure la zone de sélection.
 function clearPreview() {
     if (previewUrl) URL.revokeObjectURL(previewUrl)
     previewUrl = null
