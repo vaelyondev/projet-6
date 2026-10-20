@@ -54,7 +54,8 @@ h1 a span {
 	cursor: pointer;
 }
 
-.filters button:hover {
+.filters button:hover,
+.filters button.is-active {
 	color: white;
 	background-color: #1d6154;
 }
@@ -161,6 +162,7 @@ h1 a span {
 }
 
 .modal-content {
+	overflow-y: auto;
 	width: 630px;
 	height: 688px;
 	max-width: calc(100vw - 40px);
@@ -366,6 +368,32 @@ h1 a span {
 	width: 100%;
 	height: 100%;
 	object-fit: contain;
+}
+
+/* Messages d'erreur et navigation au clavier */
+#add-work-error,
+#modal-error,
+#gallery-error {
+	color: #b42318;
+	text-align: center;
+	line-height: 1.4;
+	margin: 12px 0;
+}
+
+#add-work-error:empty,
+#modal-error:empty,
+#gallery-error:empty {
+	display: none;
+}
+
+button:disabled {
+	cursor: not-allowed;
+}
+
+button:focus-visible,
+a:focus-visible {
+	outline: 2px solid #1d6154;
+	outline-offset: 4px;
 }
 
 /* Fin de Mes ajouts */
